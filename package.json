@@ -1,0 +1,14 @@
+{
+  "name": "connection-tester",
+  "version": "1.0.0",
+  "description": "test WebRTC connections in Streamr Network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "streamr-network": "^24.3.3"
+  }
+}
