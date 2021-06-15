@@ -8,16 +8,17 @@ const LOG_OWN_MESSAGES = false
 
 // Parse 1st argument as node id
 const args = process.argv.slice(2)
-if (args.length < 0 || args.length > 2) {
-    console.error('Args: node index.js <name> [port]')
+if (args.length < 1 || args.length > 3) {
+    console.error('Args: node index.js <name> [hostname] [port]')
     process.exit(1)
 }
-const name = args[0];
-const port = args[1] || 7000;
+const name = args[0]
+const host = args[1] || '0.0.0.0'
+const port = args[2] || 7000;
 
 (async() => {
     const networkNode = await startNetworkNode({
-        host: '127.0.0.1',
+        host,
         port,
         trackers: [TRACKER_URL],
         id: name

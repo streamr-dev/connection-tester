@@ -13,8 +13,8 @@ If you need more debug information you can run:
 LOG_LEVEL=trace node index.js my-name
 ```
 
-Change port (e.g. when running multiples):
+Change hostname and port (e.g. when running multiples):
 ```
-node index.js my-name 6666
+node index.js my-name 0.0.0.0 6666
 ```
 
