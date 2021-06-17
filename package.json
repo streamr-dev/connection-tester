@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "streamr-network": "^24.3.3"
+    "streamr-network": "^25.0.0"
   }
 }
