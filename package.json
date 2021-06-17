@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "public-ip": "^4.0.4",
     "streamr-network": "^25.0.0"
   }
 }

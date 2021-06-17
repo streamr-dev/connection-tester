@@ -1,6 +1,9 @@
 const { startNetworkNode, Protocol } = require('streamr-network')
+const publicIp = require('public-ip')
 const { StreamMessage, MessageIDStrict, MessageRef } = Protocol
 
+
+const USE_ADVERTISED_WS_URL = true
 const TRACKER_URL = 'ws://95.216.64.56:30300'
 const PUBLISH_INTERVAL = 10 * 1000
 const REPORT_NEIGHBORS_INTERVAL = 30 * 1000
@@ -12,16 +15,25 @@ if (args.length < 1 || args.length > 3) {
     console.error('Args: node index.js <name> [hostname] [port]')
     process.exit(1)
 }
-const name = args[0]
-const host = args[1] || '0.0.0.0'
+const name = args[0];
+const host = args[1] || '0.0.0.0';
 const port = args[2] || 7000;
 
 (async() => {
+    let advertisedWsUrl = undefined
+    if (USE_ADVERTISED_WS_URL) {
+        const ip = await publicIp.v4()
+        if (ip) {
+            advertisedWsUrl = `ws://${ip}:${port}`
+        }
+        console.info(`Using advertisedHostName ${advertisedWsUrl}`)
+    }
     const networkNode = await startNetworkNode({
         host,
         port,
         trackers: [TRACKER_URL],
-        id: name
+        id: name,
+        advertisedWsUrl
     })
     networkNode.on('streamr:node:node-connected', (nodeId) => {
         console.info(`node ${nodeId} connected`)
