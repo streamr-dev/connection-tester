@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "nat-type-identifier": "^2.0.9",
     "public-ip": "^4.0.4",
     "streamr-network": "^25.0.0"
   }

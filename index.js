@@ -1,3 +1,4 @@
+const fetchNatType = require('nat-type-identifier')
 const { startNetworkNode, Protocol } = require('streamr-network')
 const publicIp = require('public-ip')
 const { StreamMessage, MessageIDStrict, MessageRef } = Protocol
@@ -20,6 +21,7 @@ const host = args[1] || '0.0.0.0';
 const port = args[2] || 7000;
 
 (async() => {
+    await printNatType()
     let advertisedWsUrl = undefined
     if (USE_ADVERTISED_WS_URL) {
         const ip = await publicIp.v4()
@@ -75,3 +77,17 @@ const port = args[2] || 7000;
         console.info(`current neighbors: ${JSON.stringify(neighbors)}`)
     }, REPORT_NEIGHBORS_INTERVAL)
 })()
+
+async function printNatType() {
+    console.info('Analyzing NAT type')
+    try {
+        const result = await fetchNatType({ 
+            logsEnabled: false,
+            sampleCount: 5,
+            stunHost: 'stun.sipgate.net'
+        })
+        console.info(`NAT type: ${result}`)
+    } catch (e) {
+        consone.warn('Failed to detect NAT type')
+    }
+}
