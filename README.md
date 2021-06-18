@@ -18,3 +18,8 @@ Change hostname and port (e.g. when running multiples):
 node index.js my-name 0.0.0.0 6666
 ```
 
+Docker:
+```
+docker build -t connection-tester .
+docker run --env NAME=myName connection-tester
+```
